@@ -1,0 +1,24 @@
+{
+    "Player": {
+        "checkpoints": [
+            {
+                "steps": 451,
+                "file_path": "results\\Player-12\\Player\\Player-451.onnx",
+                "reward": 0.006800000043585897,
+                "creation_time": 1606143828.3127232
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 451,
+            "file_path": "results\\Player-12\\Player.onnx",
+            "reward": 0.006800000043585897,
+            "creation_time": 1606143828.3127232
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.2.0",
+        "mlagents_version": "0.22.0.dev0",
+        "torch_version": "1.6.0+cpu",
+        "tensorflow_version": "2.3.1"
+    }
+}
