@@ -4,6 +4,8 @@
 
 Het doel van dit Unity project is om een speler (Agent) te leren om over obstakels te springen die van twee richten op hem afkomen door gebruik te maken van een belongingsysteem. In deze README wordt uitgelegd hoe de verschillende elementen, objecten en scripts werken in dit project. 
 
+Om dit project succesvol te kunnen afronden dient er aantal dingen geïnstalleerd te zijn alvorens je kan beginnen. Hier wordt in deze handleiding niet in detail op ingegaan en wordt verwacht op voorhand in orde te zijn. Dit omvat Unity, Python, ML-Agents en TensorFlow.
+
 ## Het spel
 
 ![Het spel](Img/spel.png)
@@ -481,6 +483,21 @@ Een scène kan in Unity geopend worden om een bepaalde omgeving te gebruiken. Vo
 
 ### *MLScene*
 
-![MLScene](Img/scene)
+![MLScene](Img/scene.png)
 
-### *Opmerkingen*
+## De training
+
+Van zodra bovenstaande stappen zijn afgewerkt en de omgeving klaar is kan je beginnen met de agent te trainen.
+
+Om te beginnen open je het net gemaakte Unity-project en een terminal venster in de "learning"-map van het project.
+
+In het terminal-venster typ je dit commando: ``` mlagents-learn Player.yml --run-id Player-01 ```. De benaming "Player-01" kan aangepast worden per run. 
+
+Vervolgens keer je terug naar Unity, en druk je op de "Play"-knop. Het spel zal beginnen en de agent zal beginnen leren. 
+
+Om het verloop van het leerproces visueel op te volgen open je een nieuw terminal venster in de map Learning waarin je het commando ``` tensorboard --logdir results ``` typt.
+
+Vervolgens zal je via http://localhost:6006 de grafieken van Tensorflow kunnen raadplegen die beschrijven hoe goed de agent aan het leren is aan de hand van hoeveel rewards deze heeft gecumuleerd.
+
+
+## Opmerkingen
