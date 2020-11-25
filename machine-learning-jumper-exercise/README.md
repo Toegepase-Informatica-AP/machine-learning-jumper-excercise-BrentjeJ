@@ -52,12 +52,13 @@ De *environment* is het hoofdobject van het project. Hierin zijn alle andere obj
 Het *Player* object wordt op een simpele manier voorgesteld door een bean met een sphere object als rechteroog en linkeroog. De *player* staat stil op het speelveld en heeft enkel de mogelijkheid om de "jump" actie uit te voeren.
 Wanneer de "jump"-actie wordt uitgevoerd kan de *player* zelf bepalen. 
 Met andere woorden wilt dit zeggen dat doorheen het leerproces van de *player* het moment waarop de "jump"-actie wordt uitegevoerd zal varieren naarmate de *agent* slimmer wordt en het spel beter begrijpt.
-Om ervoor te zorgen dat de *player* geen andere bewegingen kan uitvoeren worden de waarden van X- en Y- Postition waarden op 0 en 1 respectievelijk vastgezet. Ook de X-, Y- en Z- rotation waarden worden hiervoor op 0 gehouden. Hierdoor kan de *player* niet roteren en blijft het gezichtsveld enkel wat binnen het Ray Percention veld valt gehouden.
+Om ervoor te zorgen dat de *player* geen andere bewegingen kan uitvoeren worden de waarden van X- en Y- Postition waarden op 0 en 1 respectievelijk vastgezet. Ook de X-, Y- en Z- rotation waarden worden hiervoor op 0 gehouden. Hierdoor kan de *player* niet roteren en blijft het gezichtsveld binnen de grenzen die worden aangegeven bij de Ray Perception.
 
 Het Ray Perception veld wordt aangemaakt op beide ogen. Voor zowel het linker als het rechteroog wordt dit component toegevoegd. 
 
-De Ray Perception sensoren moeten met bepaalde waarden worden ingesteld. Hieronder vindt u de tabel van hoe deze voor dit project dienen ingesteld te worden. De ogen hebben een breedt gezichtsveld om zo objecten van beide kanten te kunnen zien aankomen.
-De "Detectable Tags" is zeer belangrijk aangezien we hier moeten aangeven welke objecten de ogen moeten kunnen detecteren. In het geval van dit spel is het enkel een obstakel dat moet gedetecteerd dient te worden. 
+De Ray Perception sensoren moeten met bepaalde waarden worden ingesteld. Hieronder staat de tabel met hoe deze waarden voor dit project dienen ingesteld te worden. De ogen hebben een breed gezichtsveld om zo objecten van beide kanten te kunnen zien aankomen.
+De "Detectable Tags" is zeer belangrijk aangezien we hier moeten aangeven welke objecten de ogen moeten kunnen detecteren. In het geval van dit spel is het enkel een *Obstacle* dat moet gedetecteerd dient te worden. 
+
 | Variabele             | Waarde         |
 | --------------------- | -------------- |
 | Detectable Tags       | Obstacle       |
@@ -70,10 +71,10 @@ De "Detectable Tags" is zeer belangrijk aangezien we hier moeten aangeven welke 
 | Start Vertical Offset | 0              |
 | End Vertical Offset   | -10            |
 
-Verder wordt er voor de *player* een collider-component toegevoegd met interacties tegenover *Floor* en *Obstacle*. Dit is nodig om een beloning of straf toe te kennen indien er een aanraking is tussen deze elementen. 
-Door het "Floor*-object aan te raken (wat wordt waargenomen met de collider) weet de*player* dat hij opnieuw kan springen. De agent verliest punten indien hij in aanraking komt met een obstakel. 
+Verder wordt er voor de *Player* een collider-component toegevoegd om interacties tegenover *Floor* en *Obstacle* te kunnen waarnemen. Dit is nodig om een beloning of straf toe te kennen indien er een aanraking is tussen deze elementen. 
+Door het "Floor*-object aan te raken (wat wordt waargenomen met de collider) weet de *Player* dat hij opnieuw kan springen. De *Agent* verliest punten indien hij in aanraking komt met een *Obstacle*. 
 
-Het *Player*-object wordt verder nog het *Player*-script toegekend waarover verder in dit bestand meer informatie gegeven zal worden. Het is wel belangrijk om de waarden bij dit script correct in te vullen.
+Het *Player*-object wordt verder nog het *Player*-script toegekend waarover verder in deze handleiding meer informatie gegeven zal worden. Het is wel belangrijk om de waarden bij dit script correct in te vullen.
 Voor dit project dient "Max Step" ingesteld te worden op 200 en "Jump Force" op 5.40.
 Ook het ingebouwde script van de ML-Agents genaamd "Desicion Requester" dient toegevoegd te worden aan de *Player*. Hier hoeven geen aanpassingen aan gedaan te worden.
 
