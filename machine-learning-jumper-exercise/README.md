@@ -6,6 +6,13 @@ Het doel van dit Unity project is om een speler (Agent) te leren om over obstake
 
 Om dit project succesvol te kunnen afronden dient er aantal dingen geïnstalleerd te zijn alvorens je kan beginnen. Hier wordt in deze handleiding niet in detail op ingegaan en wordt verwacht op voorhand in orde te zijn. Dit omvat Unity, Python, ML-Agents en TensorFlow.
 
+### *Groep*
+
+Groepsnaam: JB
+Studenten: 
+ - Brent Janssens       |S106999
+ - Jana Van Goethem     |S106673
+
 ## Het spel
 
 ![Het spel](Img/spel.png)
@@ -117,11 +124,9 @@ We bepalen het gedrag van de objecten door deze scripts toe te kennen. De inhoud
 
 Het environment script zorgt voor het intialiseren van de verschillende objecten in de scene. Ook het spawnen van de *Obstacles* zal in het environment script worden bepaald.
 
-```
-using Assets.Scripts;
-using TMPro;
-using UnityEngine;
+Declaratie van de variabelen.
 
+```
 public class Environment : MonoBehaviour
 {
     public Obstacle obstacle;
@@ -152,8 +157,10 @@ public class Environment : MonoBehaviour
 
     //The time to spawn the object
     private float randomTimed;
+``` 
+Starten van de ``` currentTimer ``` met maximale en minimale tijd startend van 0.
 
-    // Start is called before the first frame update
+```
     private void Start()
     {
         currentTimer = 0f;
@@ -164,7 +171,9 @@ public class Environment : MonoBehaviour
     {
         randomTimed = Random.Range(minTime, maxTime);
     }
-
+```
+Hier worden alle private variabelen geinitialiseerd
+```
     public void OnEnable()
     {
         p = transform.GetComponentInChildren<Player>();
@@ -186,6 +195,8 @@ public class Environment : MonoBehaviour
         spawnLineLocationCross = spawnLineCross.transform.position;
         spawnLineRotationCross = spawnLineCross.transform.rotation;
     }
+```
+Methode die wordt aangeroepen bij het eindigen van de episode en zorgt voor het vernietigen van het *obstacle*-object.
 
     public void ClearEnvironment()
     {
@@ -194,12 +205,17 @@ public class Environment : MonoBehaviour
             Destroy(obstacle.gameObject);
         }
     }
+Deze methode ``` SpawnPlayer() ``` zorgt voor het genereren van de speler en wordt aangeroepen in het "Player"-script.
+```
 
     public void SpawnPlayer()
     {
         Player newPlayer = Instantiate(player, new Vector3(0, 1.5f, 42.2f), new Quaternion(0f, 180f, 0f, 0f));
         newPlayer.transform.SetParent(gameObject.transform);
     }
+```
+Deze methode ``` SpawnObstacle() ``` & ``` SpawnObstacleCross() ``` zorgen voor het genereren van de *Obstacles* langs beiden richtingen.
+```
 
     private void SpawnObstacle()
     {
@@ -217,19 +233,18 @@ public class Environment : MonoBehaviour
         Obstacle newObstacleCross = Instantiate(obstacle, new Vector3(spawnLineLocationCross.x, floorCross.transform.position.y + 0.5f, spawnLineLocationCross.z), spawnLineRotationCross);
         newObstacleCross.transform.SetParent(obstaclesCross.transform);
     }
-
+```
+In deze functies wordt op basis van een random tijdsbepaling bepaald wanneer de *Obstacles* mogen spawnen. Er wordt ook voor gezorgd er dat geen twee *Obstacles* op dezelfde moment gespawnt worden en elkaar dus niet kunnen raken op het kruispunt.
+```
     private void ResetTimer()
     {
         currentTimer = 0;
     }
-
     private void FixedUpdate()
     {
-        //Counts up
         currentTimer += Time.deltaTime;
         int randomValue = Random.Range(1, 3);
 
-        //Check if its the right time to spawn the object
         if (CanSpawn())
         {
             switch (randomValue)
@@ -263,6 +278,7 @@ public class Environment : MonoBehaviour
 ```
 
 ### *Player script*
+Het "Player"-script bepaald de eigenschappen van de *Agent*. In dit script wordt de actie van "Jump" bepaald en de collision met een *Obstacle*. Het reward system wordt ook in dit script uitgewerkt en hier worden de waardes die verdient of verloren kunnen worden door de *Agent* bepaald. Verder vindt je in dit script een aantal basis ML-Agents funties zoals ``` OnEpisodeBegin() ```, ``` OnCollisionEnter() ``` en ``` OnActionReceived() ```.
 
 ```
 using Unity.MLAgents;
@@ -282,6 +298,8 @@ namespace Assets.Scripts
         public override void CollectObservations(VectorSensor sensor)
         {
         }
+```
+In dit gedeelte zorgen we ervoor dat we onze *Player* ook kunnen doen springen met het manueel indrukken van de spatiebalk voor testingsdoeleinden.
 
         public override void Heuristic(float[] actionsOut)
         {
@@ -290,6 +308,9 @@ namespace Assets.Scripts
                 Jump();
             }
         }
+
+In de methode ``` Jump() ``` zorgen we dat de *Player* kan springen. Hij verliest -0.001f per keer de *Player* springt. 
+```
         private void Jump()
         {
             if (isJumpReady)
@@ -299,6 +320,9 @@ namespace Assets.Scripts
                 AddReward(-0.001f);
             }
         }
+
+```
+In de methode ``` FixedUpdate() ``` wordt de basisfunctie ``` RequestDecision() ``` van de ML-Agents library aangeroepen. Dit zal dan op basis van Machine Learning bepalen of de *Player* zal springen of niet. Indien de *Player* ervoor kiest om niet te springen omdat hij dit onnodig vindt wordt een kleine rewards toegekend. Op deze manier wordt de *Player* niet alleen afgestraft voor fouten maar ook aangemoedigt voor correcte handelingen.
 
         private void FixedUpdate()
         {
@@ -314,6 +338,9 @@ namespace Assets.Scripts
                 AddReward(0.001f);
             }
         }
+
+Hier wordt het starten en eindigen van het learning-proces van de *Agent* bepaald.
+```
         public override void Initialize()
         {
             base.Initialize();
@@ -341,6 +368,8 @@ namespace Assets.Scripts
                 environment.SpawnPlayer();
             }
         }
+```
+Hier bepalen we de score die de *Player* verliest indien hij in aanraking komt met een *Obstacle*. Er is te zien hoe de player 1 punt verliest voor zowel het aanraken van het *Obstacle* als *ObstacleCross* dat uit de andere richting komt. Hij moet dus leren over de *Obstacles* van beide kanten heen te springen.
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -361,10 +390,12 @@ namespace Assets.Scripts
             }
         }
     }
-```
+
 
 ### *Obstacle script*
+Het "Obstacle"-script zorgt voor de beweging van de *Obstacles* en *ObstaclesCross*. De snelheid van de *Obstacles* wordt hier bepaald en vanaf de *Obstacles* mogen worden vernietigd.
 
+Declaratie van de variabelen.
 ```
 using UnityEngine;
 
@@ -381,7 +412,9 @@ namespace Assets.Scripts
         private Environment environment;
 
         public Player ply;
-
+```
+Hier bepalen we de snelheid van het *Obstacle*
+```
         public void Start()
         {
             if (!constantGivenSpeed)
@@ -393,6 +426,8 @@ namespace Assets.Scripts
                 randomizedSpeed = givenSpeed;
             }
         }
+```
+Hier doen we het *Obstacle* bewegen met de random bepaalde snelheid.
 
         private void FixedUpdate()
         {
@@ -411,6 +446,10 @@ namespace Assets.Scripts
 
             transform.Translate(Vector3.forward * Time.deltaTime * randomizedSpeed);
         }
+
+Hier gaan we kijken of een *Obstacle* over de *DeadLine* gaat en indien dit het geval is wordt het *Obstacle* vernietigd. 
+Ook bepalen we hier dat de *Player* een punt toegekend krijgt indien het *Obstacle* over de *DeadLine* gaat omdat dit dan wilt zeggen dat de *Player* over het *Obstacle* is gesprongen. 
+```
 
         private void OnTriggerEnter(Collider other)
         {
@@ -476,7 +515,6 @@ public class SpawnLineCross : MonoBehaviour
 }
 ```
 
-
 ## Scènes
 
 Een scène kan in Unity geopend worden om een bepaalde omgeving te gebruiken. Voor dit project hebben we een *MLScene* opgebouwd waarin alle elementen van dit project in terug te vinden zijn.
@@ -491,7 +529,7 @@ Van zodra bovenstaande stappen zijn afgewerkt en de omgeving klaar is kan je beg
 
 Om te beginnen open je het net gemaakte Unity-project en een terminal venster in de "learning"-map van het project.
 
-In het terminal-venster typ je dit commando: ``` mlagents-learn Player.yml --run-id Player-01 ```. De benaming "Player-01" kan aangepast worden per run. 
+In het terminal-venster typ je dit commando: ``` mlagents-learn Player.yml --run-id Player-01 ```. De benaming "Player-01" kan aangepast worden per trainingssessie. 
 
 Vervolgens keer je terug naar Unity, en druk je op de "Play"-knop. Het spel zal beginnen en de agent zal beginnen leren. 
 
@@ -501,3 +539,8 @@ Vervolgens zal je via http://localhost:6006 de grafieken van Tensorflow kunnen r
 
 
 ## Opmerkingen
+
+Voor dit project hebben wij ons voor bepaalde onderdelen gebaseerd op het project van de groep van Dana.
+We hebben er wel voor gezorgd dat het project uniek is door een andere uitbreiding voor het project te kiezen, namelijk de kruising met obstakels die van twee richtingen komen. 
+We hebben vele nieuwe elementen toegevoegd en drastische wijzigingen aangebracht aan de overgenomen elementen. 
+Hierdoor zijn we van mening dat ons project voldoende uniek is en we enkel de overgenomen elementen als richtlijn gebruikt hebben.

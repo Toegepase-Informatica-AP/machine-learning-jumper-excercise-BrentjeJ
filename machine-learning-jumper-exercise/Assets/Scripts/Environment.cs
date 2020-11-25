@@ -27,13 +27,9 @@ public class Environment : MonoBehaviour
     private Quaternion spawnLineRotation;
     private Quaternion spawnLineRotationCross;
 
-    //current time
     private float currentTimer;
-
-    //The time to spawn the object
     private float randomTimed;
 
-    // Start is called before the first frame update
     private void Start()
     {
         currentTimer = 0f;
@@ -105,11 +101,9 @@ public class Environment : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //Counts up
         currentTimer += Time.deltaTime;
         int randomValue = Random.Range(1, 3);
 
-        //Check if its the right time to spawn the object
         if (CanSpawn())
         {
             switch (randomValue)
