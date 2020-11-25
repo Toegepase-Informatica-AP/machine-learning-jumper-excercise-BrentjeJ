@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2865664649273572607}
   - component: {fileID: 2595898046567273005}
   - component: {fileID: 1958243424}
+  - component: {fileID: 363188969}
   m_Layer: 0
   m_Name: SpawnLine
   m_TagString: SpawnLine
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 2865664649273572601}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.05, z: -5.9}
-  m_LocalScale: {x: 3.5, y: 0.1, z: 0.001}
+  m_LocalScale: {x: 3, y: 0.1, z: 0.001}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -61,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 214bad7271fb4e344ba85bc1a7bcafe0, type: 2}
+  - {fileID: 2100000, guid: fbd4b6fb57051c649a01e0f62b0a7be9, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -123,3 +124,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &363188969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2865664649273572601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d35675388d00ce246b1dcdbbd2702909, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

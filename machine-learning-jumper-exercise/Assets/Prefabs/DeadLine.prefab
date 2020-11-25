@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 856909676572124610}
   - component: {fileID: 7595350942329319944}
   - component: {fileID: 1114833501}
+  - component: {fileID: 760544795}
   m_Layer: 0
   m_Name: DeadLine
   m_TagString: DeadLine
@@ -61,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 613a9e9ce4a6b6e45a8afcdd7994cae5, type: 2}
+  - {fileID: 2100000, guid: 3f2b92bf88718674987de9e4b67002fd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -123,3 +124,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &760544795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 856909676572124620}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 316b04d9c055da4428d8ae0760073715, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

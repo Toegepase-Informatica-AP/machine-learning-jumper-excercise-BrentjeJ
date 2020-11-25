@@ -6,11 +6,11 @@ namespace Assets.Scripts
 {
     public class Player : Agent
     {
-        public float jumpForce = 5.35f;
+        public float jumpForce = 5.40f;
 
         private Rigidbody body;
         private Environment environment;
-        private bool jumpIsReady = true;
+        private bool isJumpReady = true;
 
         public override void CollectObservations(VectorSensor sensor)
         {
@@ -25,17 +25,17 @@ namespace Assets.Scripts
         }
         private void Jump()
         {
-            if (jumpIsReady)
+            if (isJumpReady)
             {
                 body.AddForce(new Vector3(0, jumpForce, 0), ForceMode.VelocityChange);
-                jumpIsReady = false;
+                isJumpReady = false;
                 AddReward(-0.001f);
             }
         }
 
         private void FixedUpdate()
         {
-            if (jumpIsReady)
+            if (isJumpReady)
             {
                 RequestDecision();
             }
@@ -90,7 +90,7 @@ namespace Assets.Scripts
             }
             else if (collider.CompareTag("Floor"))
             {
-                jumpIsReady = true;
+                isJumpReady = true;
             }
         }
     }

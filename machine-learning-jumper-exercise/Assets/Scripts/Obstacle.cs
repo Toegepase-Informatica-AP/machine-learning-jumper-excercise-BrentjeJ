@@ -4,7 +4,7 @@ namespace Assets.Scripts
 {
     public class Obstacle : MonoBehaviour
     {
-        public float givenSpeed = 5f;
+        public float givenSpeed = 4f;
         public bool constantGivenSpeed = true;
         public float minSpeed = 1f;
         public float maxSpeed = 10;

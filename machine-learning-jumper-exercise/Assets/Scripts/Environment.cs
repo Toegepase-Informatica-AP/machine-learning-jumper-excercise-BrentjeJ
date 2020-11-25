@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Environment : MonoBehaviour
 {
-    public Obstacle obstaclePrefab;
-    public Player playerPrefab;
+    public Obstacle obstacle;
+    public Player player;
     public float maxTime = 2f;
     public float minTime = 1f;
 
     private SpawnLine spawnLine;
     private SpawnLineCross spawnLineCross;
 
-    private Player player;
+    private Player p;
     private TextMeshPro scoreBoard;
 
     private GameObject obstacles;
@@ -47,7 +47,7 @@ public class Environment : MonoBehaviour
 
     public void OnEnable()
     {
-        player = transform.GetComponentInChildren<Player>();
+        p = transform.GetComponentInChildren<Player>();
         scoreBoard = transform.GetComponentInChildren<TextMeshPro>();
 
         //for default
@@ -77,7 +77,7 @@ public class Environment : MonoBehaviour
 
     public void SpawnPlayer()
     {
-        Player newPlayer = Instantiate(playerPrefab, new Vector3(0, 1.5f, 42.2f), new Quaternion(0f, 180f, 0f, 0f));
+        Player newPlayer = Instantiate(player, new Vector3(0, 1.5f, 42.2f), new Quaternion(0f, 180f, 0f, 0f));
         newPlayer.transform.SetParent(gameObject.transform);
     }
 
@@ -85,7 +85,7 @@ public class Environment : MonoBehaviour
     {
         ResetTimer();
         //for default
-        Obstacle newObstacle = Instantiate(obstaclePrefab, new Vector3(spawnLineLocation.x, floor.transform.position.y + 0.5f, spawnLineLocation.z), spawnLineRotation);
+        Obstacle newObstacle = Instantiate(obstacle, new Vector3(spawnLineLocation.x, floor.transform.position.y + 0.5f, spawnLineLocation.z), spawnLineRotation);
         newObstacle.transform.SetParent(obstacles.transform);
         
     }
@@ -94,7 +94,7 @@ public class Environment : MonoBehaviour
     {
         ResetTimer();
         //for cross
-        Obstacle newObstacleCross = Instantiate(obstaclePrefab, new Vector3(spawnLineLocationCross.x, floorCross.transform.position.y + 0.5f, spawnLineLocationCross.z), spawnLineRotationCross);
+        Obstacle newObstacleCross = Instantiate(obstacle, new Vector3(spawnLineLocationCross.x, floorCross.transform.position.y + 0.5f, spawnLineLocationCross.z), spawnLineRotationCross);
         newObstacleCross.transform.SetParent(obstaclesCross.transform);
     }
 
@@ -127,7 +127,7 @@ public class Environment : MonoBehaviour
             RestartCurrentTimer();
         }
 
-        scoreBoard.text = player.GetCumulativeReward().ToString("f3");
+        scoreBoard.text = p.GetCumulativeReward().ToString("f3");
     }
 
     private bool CanSpawn()
