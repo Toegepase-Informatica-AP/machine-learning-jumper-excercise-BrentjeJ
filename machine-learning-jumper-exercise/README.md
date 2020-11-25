@@ -36,12 +36,6 @@ Om de agent te kunnen trainen moet we eerst een omgeving hiervoor opzetten. Het 
 
 De *environment* is het hoofdobject van het project. Hierin zijn alle andere objecten aanwezig die de omgeving zelf zal aanmaken (spawnen) bij de start van het spel. In dit project specifiek worden de speler (Player) en het obstakel (Obstacle) gespawned bij de opstart van het spel door de *environment*. Men kan meedere *environments* tegelijk in een scène zetten om zo meerdere spelomgevingen tegelijk te laten lopen. Dit zal het leerproces van de agent aanzienlijk versnellen maar is intensiever voor het toestel waarop de omgevingen gedraaid worden. Hardware limitaties zijn hier dus wel van toepassing.
 
-### *ScoreBoard*
-
-![ScoreBoard](Img/scoreboard.png)
-
-Het *ScoreBoard* is een tekstelement dat de score (beloning) van de agent zal toonen doorheen het trainingsproces. Hierdoor kan men makkelijk visueel zien wat de huidige score van die specifieke agent is.
-
 ### *Player*
 
 ![Player](Img/player.png)
@@ -74,6 +68,26 @@ Het *Player*-object wordt verder nog het *Player*-script toegekend waarover verd
 Voor dit project dient "Max Step" ingesteld te worden op 200 en "Jump Force" op 5.40.
 Ook het ingebouwde script van de ML-Agents genaamd "Desicion Requester" dient toegevoegd te worden aan de *Player*. Hier hoeven geen aanpassingen aan gedaan te worden.
 
+### *Obstacles*
+
+![Obstacles](Img/obstacles.png)
+
+Het *Obstacles* & *ObstaclesCross*-objecten zijn een Parent object waaronder de *Obstacle* objecten vallen. Dit wordt niet verder gebruikt buiten door het environment script.
+
+### *Obstacle*
+
+![Obstacle](Img/obstacle.png)
+
+Het *Obstacle* & *ObstacleCross*-object is een rechthoek die een voorwaartse beweging maakt over het *Floor*-object. Deze rechthoek heeft een collider-component om een interactie mogelijk te maken tussen dit object en de *Player*.
+
+Als de *Player* het *Obstacle* aanraakt verliest hij punten en wordt het *Obstacle* vernietigt.
+
+### *ScoreBoard*
+
+![ScoreBoard](Img/scoreboard.png)
+
+Het *ScoreBoard* is een tekstelement dat de score (beloning) van de agent zal toonen doorheen het trainingsproces. Hierdoor kan men makkelijk visueel zien wat de huidige score van die specifieke agent is.
+
 ### *Floor*
 
 ![Floor prefab](Img/floor.png)
@@ -92,20 +106,6 @@ Het *SpawnLine* & *SpawnlineCross*-object is een lijn die het begint van de *Flo
 
 Het *DeadLine* & *DeadlineCross-object* is een lijn die het einde van de vloer aangeeft en waar andere objecten bij het bereiken van deze lijn doet destroyen. Om het mogelijk te maken andere objecten te destroyen bij aanraking van de *DeadLine* wordt hieraan een collider-component toegevoegd.
 De *DeadLine* wordt op het *Floor*-object geplaatst met de *DeadLineCross* op het *FloorCross*-object. Dit zorgt ervoor dat beide *Floor*-objecten een *DeadLine* bevatten en er op beide objecten kunnen gedestroyed worden.
-
-### *Obstacles*
-
-![Obstacles](Img/obstacles.png)
-
-Het *Obstacles* & *ObstaclesCross*-objecten zijn een Parent object waaronder de *Obstacle* objecten vallen. Dit wordt niet verder gebruikt buiten door het environment script.
-
-### *Obstacle*
-
-![Obstacle](Img/obstacle.png)
-
-Het *Obstacle* & *ObstacleCross*-object is een rechthoek die een voorwaartse beweging maakt over het *Floor*-object. Deze rechthoek heeft een collider-component om een interactie mogelijk te maken tussen dit object en de *Player*.
-
-Als de *Player* het *Obstacle* aanraakt verliest hij punten en wordt het *Obstacle* vernietigt.
 
 ## Scripts
 
