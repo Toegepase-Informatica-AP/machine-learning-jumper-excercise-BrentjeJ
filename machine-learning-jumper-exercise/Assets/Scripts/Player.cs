@@ -6,7 +6,7 @@ namespace Assets.Scripts
 {
     public class Player : Agent
     {
-        public float jumpForce = 5.40f;
+        public float jumpForce = 4f;
 
         private Rigidbody body;
         private Environment environment;

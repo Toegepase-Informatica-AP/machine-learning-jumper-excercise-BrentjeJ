@@ -290,7 +290,7 @@ namespace Assets.Scripts
 {
     public class Player : Agent
     {
-        public float jumpForce = 5.40f;
+        public float jumpForce = 4f;
 
         private Rigidbody body;
         private Environment environment;
@@ -530,7 +530,7 @@ Van zodra bovenstaande stappen zijn afgewerkt en de omgeving klaar is kan je beg
 
 Om te beginnen open je het net gemaakte Unity-project en een terminal venster in de "learning"-map van het project.
 
-In het terminal-venster typ je dit commando: ``` mlagents-learn Player.yml --run-id Player-01 ```. De benaming "Player-01" kan aangepast worden per trainingssessie. 
+In het terminal-venster typ je dit commando: ``` mlagents-learn Player-01.yml --run-id Player-01 ```. De benaming "Player-01" kan aangepast worden per trainingssessie. 
 
 Vervolgens keer je terug naar Unity, en druk je op de "Play"-knop. Het spel zal beginnen en de agent zal beginnen leren. 
 
