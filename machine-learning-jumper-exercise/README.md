@@ -10,8 +10,8 @@ Om dit project succesvol te kunnen afronden dient er aantal dingen geïnstalleer
 
 Groepsnaam: JB
 Studenten: 
- - Brent Janssens       |S106999
- - Jana Van Goethem     |S106673
+ - Brent Janssens       - S106999
+ - Jana Van Goethem     - S106673
 
 ## Het spel
 
@@ -538,6 +538,17 @@ Om het verloop van het leerproces visueel op te volgen open je een nieuw termina
 
 Vervolgens zal je via http://localhost:6006 de grafieken van Tensorflow kunnen raadplegen die beschrijven hoe goed de agent aan het leren is aan de hand van hoeveel rewards deze heeft gecumuleerd.
 
+## Conclusie
+
+Tijdens het trainen van de *Agent* zien we dat deze initieel een negatieve beloning haalt. Dit is omdat de *Agent* in het begin nog totaal geen idee heeft van wat hij moet doen en gewoonweg blijft springen. Aangezien wij hebben ingesteld dat de *Agent* wordt afgestraft bij het onnodig springen zien we daarom de beloning intieel zeer laag liggen tot de *Agent* slimmer wordt en leert dat hij niet zomaar mag springen.
+
+![Grafiek](Img/grafiek.PNG)
+
+Na verloop van tijd zien we dat de *Agent* leert om te blijven staan indien er geen *Obstacle* op zich afkomt en daarvoor beloond wordt. Indien een *Obstacle* het einde van het speelveld bereikt, wat betekend dat de *Agent* erover heen gesprongen is, wordt hij daar ook voor beloond. Hoe langer we de simulatie laten draaïen, hoe slimmer de *Agent* wordt, hoe hoger de gewonnen beloning zal zijn. 
+
+Wel zien we dat er in sommige gevallen iets misloopt tijdens de training. In het begin van de sessie zal de *Agent* bijleren tot een bepaald punt, waarna de gekregen beloning stagneert. De oorzaak van deze trend hebben we niet gevonden. We vermoeden dat dit komt doordat de *Obstacle* soms door de collider heen vliegt en niet geregistreerd wordt waardoor de *Agent* geen beloning krijgt daarvoor.
+
+![Grafiek2](Img/grafiek2.PNG)
 
 ## Opmerkingen
 
